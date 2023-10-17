@@ -1,0 +1,40 @@
+from pyspark.sql import SparkSession
+
+# Create a Spark session
+spark = SparkSession.builder \
+    .appName('example') \
+    .getOrCreate()
+
+# Create two DataFrames
+df1 = spark.createDataFrame([(1, 'A'), (2, 'B'), (3, 'C')], ['id', 'value'])
+df2 = spark.createDataFrame([(1, 'X'), (2, 'Y'), (4, 'Z')], ['id', 'extra_value'])
+
+# Inner Join
+inner_join_df = df1.join(df2, df1.id == df2.id, 'inner')
+
+# Left Outer Join
+left_outer_df = df1.join(df2, df1.id == df2.id, 'left_outer')
+
+# Right Outer Join
+right_outer_df = df1.join(df2, df1.id == df2.id, 'right_outer')
+
+# Full Outer Join
+full_outer_df = df1.join(df2, df1.id == df2.id, 'outer')
+
+# Left Semi Join
+left_semi_df = df1.join(df2, df1.id == df2.id, 'left_semi')
+
+# Left Anti Join
+left_anti_df = df1.join(df2, df1.id == df2.id, 'left_anti')
+
+# Cross Join
+cross_join_df = df1.crossJoin(df2)
+
+# Show the results
+inner_join_df.show()
+left_outer_df.show()
+right_outer_df.show()
+full_outer_df.show()
+left_semi_df.show()
+left_anti_df.show()
+cross_join_df.show()
