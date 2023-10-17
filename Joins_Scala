@@ -1,0 +1,40 @@
+import org.apache.spark.sql.SparkSession
+
+// Create a Spark session
+val spark = SparkSession.builder
+  .appName("example")
+  .getOrCreate()
+
+// Create two DataFrames
+val df1 = Seq((1, "A"), (2, "B"), (3, "C")).toDF("id", "value")
+val df2 = Seq((1, "X"), (2, "Y"), (4, "Z")).toDF("id", "extra_value")
+
+// Inner Join
+val innerJoinDF = df1.join(df2, Seq("id"), "inner")
+
+// Left Outer Join
+val leftOuterDF = df1.join(df2, Seq("id"), "left_outer")
+
+// Right Outer Join
+val rightOuterDF = df1.join(df2, Seq("id"), "right_outer")
+
+// Full Outer Join
+val fullOuterDF = df1.join(df2, Seq("id"), "outer")
+
+// Left Semi Join
+val leftSemiDF = df1.join(df2, Seq("id"), "left_semi")
+
+// Left Anti Join
+val leftAntiDF = df1.join(df2, Seq("id"), "left_anti")
+
+// Cross Join
+val crossJoinDF = df1.crossJoin(df2)
+
+// Show the results
+innerJoinDF.show()
+leftOuterDF.show()
+rightOuterDF.show()
+fullOuterDF.show()
+leftSemiDF.show()
+leftAntiDF.show()
+crossJoinDF.show()
