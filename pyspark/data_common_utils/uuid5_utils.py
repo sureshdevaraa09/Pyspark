@@ -21,7 +21,7 @@ class UUIDHash:
         # Generate a UUID using the namespace
         ns = uuid.uuid5(uuid.NAMESPACE_DNS, ns)
         # Return the namespace UUID as a binary column
-        return list(ns.bytes)
+        return lit(ns.bytes)
 
     def sort(self, col_list: list, sort_order: bool) -> list:
         """
